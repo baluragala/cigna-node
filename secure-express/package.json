@@ -1,5 +1,5 @@
 {
-  "name": "helloexpress",
+  "name": "secure-express",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -10,9 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "send-seekable": "^1.0.4"
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.3.0",
+    "passport": "^0.4.0",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0"
   }
 }

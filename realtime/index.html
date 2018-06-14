@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Socket io </title>
+  <script src="/socket.io/socket.io.js"></script>
+</head>
+
+<body>
+  <h1>Welcome to socket.io</h1>
+  <h3 id="status"></h3>
+  <h3 id="message"></h3>
+  <script>
+    const socket = io("http://localhost:3000");
+    socket.on("connect", function () {
+      document.querySelector("#status").innerHTML = "Connected"
+      socket.on("welcome", function (payload) {
+        document.querySelector("#message").innerHTML = payload.message
+        socket.emit("thankyou", { message: "from client" })
+      })
+      socket.on("time", function (payload) {
+        document.querySelector("#message").innerHTML = payload
+      })
+
+    })
+
+
+    socket.on("disconnect", function () {
+      document.querySelector("#status").innerHTML = "Disconnected"
+    })
+  </script>
+</body>
+
+</html>

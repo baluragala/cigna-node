@@ -3,6 +3,7 @@ const path = require("path");
 const sendSeekable = require("send-seekable");
 const bodyParser = require("body-parser");
 const productRouter = require("./routes/products");
+const axios = require("axios");
 
 const app = new Express();
 
@@ -24,6 +25,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 */
 
 const exampleBuffer = new Buffer("And close your eyes with holy dread");
+
+app.get("/github", function(req, res, next) {
+  axios.get("https://api.github.com/users").then(response => {
+    res.json(response.data);
+  });
+});
 
 app.get("/seek", sendSeekable, function(req, res, next) {
   res.sendSeekable(exampleBuffer);
