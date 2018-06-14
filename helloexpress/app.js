@@ -1,10 +1,12 @@
 const Express = require("express");
 const path = require("path");
+const sendSeekable = require("send-seekable");
 const bodyParser = require("body-parser");
 const productRouter = require("./routes/products");
 
 const app = new Express();
 
+app.use(sendSeekable);
 app.use(Express.static("public"));
 // parse application/json
 app.use(bodyParser.json());
@@ -20,6 +22,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
   DELETE -> /products/:pid
   PUT -> /products/:pid
 */
+
+const exampleBuffer = new Buffer("And close your eyes with holy dread");
+
+app.get("/seek", sendSeekable, function(req, res, next) {
+  res.sendSeekable(exampleBuffer);
+});
 
 app.use("/courses", productRouter);
 
